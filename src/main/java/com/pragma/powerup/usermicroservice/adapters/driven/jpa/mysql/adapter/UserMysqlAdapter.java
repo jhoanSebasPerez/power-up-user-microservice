@@ -20,7 +20,7 @@ public class UserMysqlAdapter implements IUserPersistencePort {
             throw new PersonAlreadyExistsException();
         }
 
-        if (personRepository.existsByMail(user.getMail())){
+        if (personRepository.existsByEmail(user.getEmail())){
             throw new MailAlreadyExistsException();
         }
 

@@ -1,29 +1,32 @@
 package com.pragma.powerup.usermicroservice.domain.model;
 
+import java.time.LocalDate;
+
 public class User {
     private Long id;
-    private String name;
-    private String surname;
-    private String mail;
+    private String firstName;
+    private String lastName;
+    private String email;
     private String phone;
-    private String address;
-    private String idDniType;
     private String dniNumber;
-    private String idPersonType;
     private String password;
+    private LocalDate birthDate;
+    private Role role;
 
-    public User(Long id, String name, String surname, String mail, String phone, String address, String idDniType, String dniNumber, String idPersonType, String password) {
+    public User(){}
+
+    public User(Long id, String firstName, String lastName, String email, String phone, String dniNumber, String password, LocalDate birthDate, Role role) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.mail = mail;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
         this.phone = phone;
-        this.address = address;
-        this.idDniType = idDniType;
         this.dniNumber = dniNumber;
-        this.idPersonType = idPersonType;
         this.password = password;
+        this.birthDate = birthDate;
+        this.role = role;
     }
+
 
     public Long getId() {
         return id;
@@ -33,28 +36,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhone() {
@@ -65,22 +68,6 @@ public class User {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getIdDniType() {
-        return idDniType;
-    }
-
-    public void setIdDniType(String idDniType) {
-        this.idDniType = idDniType;
-    }
-
     public String getDniNumber() {
         return dniNumber;
     }
@@ -89,19 +76,27 @@ public class User {
         this.dniNumber = dniNumber;
     }
 
-    public String getIdPersonType() {
-        return idPersonType;
-    }
-
-    public void setIdPersonType(String idPersonType) {
-        this.idPersonType = idPersonType;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
