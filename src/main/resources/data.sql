@@ -15,7 +15,7 @@ VALUES
         '123',
         'email@some.com',
         'Name',
-        'Perez',
+        'Last',
         '$2a$10$GlsGSNhkbVon6ZOSNMptOu5RikedRzlCAhMa7YpwvUSS0c88WT99S',
         '1234567890',
         '1995-03-22',

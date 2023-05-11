@@ -1,8 +1,8 @@
 <br />
 <div align="center">
-<h3 align="center">PRAGMA POWER-UP</h3>
+<h3 align="center">PRAGMA POWER-UP - USER MICROSERVICE</h3>
   <p align="center">
-    In this challenge you are going to design the backend of a system that centralizes the services and orders of a restaurant chain that has different branches in the city.
+    This repository contains the files related to the microservice that manages the <i><strong>Users</strong></i> of the ordering platform. 
   </p>
 </div>
 
@@ -34,28 +34,33 @@ To get a local copy up and running follow these steps.
 1. Clone the repository
 2. Change directory
    ```sh
-   cd power-up-arquetipo-v3
+   cd power-up-user-microservice
    ```
-3. Create a new database in MySQL called powerup
-4. Update the database connection settings
+3. Create a new database in MySQL called 'user-service'
+4. Update the database connection settings with your Mysql configuration
    ```yml
    # src/main/resources/application-dev.yml
    spring:
       datasource:
           url: jdbc:mysql://localhost/powerup
-          username: root
+          username: <your-username>
           password: <your-password>
    ```
-5. After the tables are created execute src/main/resources/data.sql content to populate the database
-6. Open Swagger UI and search the /auth/login endpoint and login with userDni: 123, password: 1234
+5. After the tables are created execute <i>src/main/resources/data.sql</i> content to populate the database with initial data, 
+it creates a <i>user</i>1 and assigns him the role of administrator
 
 <!-- USAGE -->
 ## Usage
 
 1. Right-click the class PowerUpApplication and choose Run
 2. Open [http://localhost:8090/swagger-ui/index.html](http://localhost:8090/swagger-ui/index.html) in your web browser
+3. search the <i>/auth/login</i> endpoint and login with userDni: 123, password: 1234
+4. Copy token in authorize to send it each request
+5. Test <i>user/create-owner</i> endpoint to validate each field in the request body
 
 <!-- ROADMAP -->
 ## Tests
 
-- Right-click the test folder and choose Run tests with coverage
+- Run Test classes found it <i>src/test/java</i>, These classes implement unit tests:
+   _UserRestControllerTest_, _UserUseCaseTest_
+- Execute them by right-click and choose Run
