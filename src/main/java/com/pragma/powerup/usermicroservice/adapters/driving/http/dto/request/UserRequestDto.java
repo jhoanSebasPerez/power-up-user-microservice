@@ -1,16 +1,15 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
+@Setter
+@Builder
+@NoArgsConstructor
 public class UserRequestDto {
     @NotNull
     @NotBlank
@@ -22,11 +21,13 @@ public class UserRequestDto {
 
     @NotNull
     @NotBlank
+    @Email(message = "Not a valid email")
     private String email;
 
     @NotNull
     @NotBlank
-    @Size(max = 13, min = 10)
+    @Size(min = 10, max = 13)
+    @Pattern(regexp = "^\\+[0-9]+$", message = "Include country code")
     private String phone;
 
     @NotNull
@@ -40,7 +41,4 @@ public class UserRequestDto {
 
     @NotNull
     private LocalDate birthDate;
-
-    @NotNull
-    private Long idRole;
 }

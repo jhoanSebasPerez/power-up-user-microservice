@@ -1,7 +1,5 @@
 package com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.adapter;
 
-import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.MailAlreadyExistsException;
-import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.PersonAlreadyExistsException;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.mappers.IUserEntityMapper;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.repositories.IUserRepository;
 import com.pragma.powerup.usermicroservice.domain.model.User;
@@ -16,15 +14,18 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     private final PasswordEncoder passwordEncoder;
     @Override
     public void saveUser(User user) {
-        if (personRepository.findByDniNumber(user.getDniNumber()).isPresent()) {
-            throw new PersonAlreadyExistsException();
-        }
-
-        if (personRepository.existsByEmail(user.getEmail())){
-            throw new MailAlreadyExistsException();
-        }
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         personRepository.save(personEntityMapper.toEntity(user));
+    }
+
+
+    @Override
+    public boolean existsByDniNumber(String dniNumber){
+        return personRepository.existsByDniNumber(dniNumber);
+    }
+
+    @Override
+    public boolean existsByEmail(String email){
+        return personRepository.existsByEmail(email);
     }
 }
