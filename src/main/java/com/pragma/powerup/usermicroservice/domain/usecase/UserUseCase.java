@@ -18,24 +18,40 @@ public class UserUseCase implements IUserServicePort {
         this.userPersistencePort = personPersistencePort;
     }
 
-    @Override
-    public void saveOwner(User user) {
+    private User saveUser(User user) {
         if(userPersistencePort.existsByDniNumber(user.getDniNumber()))
             throw new PersonAlreadyExistsException();
         if(userPersistencePort.existsByEmail(user.getEmail()))
             throw new MailAlreadyExistsException();
         if(!hasLegalAge(user))
             throw new UserHasNotLegalAgeException();
-        Role ownerRole = new Role();
-        ownerRole.setId(Constants.OWNER_ROLE_ID);
-        user.setRole(ownerRole);
-        userPersistencePort.saveUser(user);
+
+        return userPersistencePort.saveUser(user);
+    }
+
+
+    @Override
+    public User saveOwner(User user) {
+        user.setRole(new Role());
+        user.getRole().setId(Constants.OWNER_ROLE_ID);
+        return saveUser(user);
+    }
+
+    @Override
+    public User saveEmployee(User user) {
+        user.setRole(new Role());
+        user.getRole().setId(Constants.EMPLOYEE_ROLE_ID);
+        return saveUser(user);
+    }
+
+    @Override
+    public boolean isOwner(String userDni) {
+        return userPersistencePort.isOwner(userDni);
     }
 
     private boolean hasLegalAge(User person){
         LocalDateTime now = LocalDateTime.now();
         return now.getYear() - person.getBirthDate().getYear() >= 18;
     }
-
 
 }

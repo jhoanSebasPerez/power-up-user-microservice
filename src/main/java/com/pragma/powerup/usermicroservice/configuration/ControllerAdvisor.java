@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.*;
@@ -23,6 +24,7 @@ import static com.pragma.powerup.usermicroservice.configuration.Constants.*;
 public class ControllerAdvisor{
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
     public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException ex) {
         List<Map<String, String>> errorList = ex.getFieldErrors()
                 .stream()

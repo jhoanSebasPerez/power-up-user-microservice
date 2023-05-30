@@ -23,13 +23,21 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
     private String phone;
+
     @Column(unique = true, nullable = false, length = 20)
     private String dniNumber;
+
     private String password;
+
     private LocalDate birthDate;
 
     @ManyToOne(optional = true)
