@@ -25,4 +25,10 @@ public class UserHandlerImpl implements IUserHandler {
     public boolean isOwner(String userDni) {
         return personServicePort.isOwner(userDni);
     }
+
+    @Override
+    public UserResponseDto saveClient(UserRequestDto userRequestDto) {
+        User userSaved = personServicePort.saveClient(personRequestMapper.toUser(userRequestDto));
+        return personRequestMapper.toResponse(userSaved);
+    }
 }

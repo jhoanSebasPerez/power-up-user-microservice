@@ -8,4 +8,6 @@ public interface IUserServicePort {
     User saveEmployee(User user);
 
     boolean isOwner(String userDni);
+
+    User saveClient(User user);
 }

@@ -59,6 +59,20 @@ public class UserRestController {
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.EMPLOYEE_CREATED_MESSAGE));
     }
 
+    @Operation(summary = "Add a new user (client)",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "User created",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+                    @ApiResponse(responseCode = "409", description = "User already exists",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @PostMapping("/register")
+    public ResponseEntity<Map<String, String>> saveClient(
+            @Validated @RequestBody UserRequestDto userRequestDto) {
+        personHandler.saveClient(userRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
+    }
+
 
     @Operation(summary = "Verify if the user is an owner",
             responses = {

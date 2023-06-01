@@ -7,4 +7,6 @@ public interface IUserHandler {
     UserResponseDto saveOwner(UserRequestDto userRequestDto);
 
     boolean isOwner(String userId);
+
+    UserResponseDto saveClient(UserRequestDto userRequestDto);
 }

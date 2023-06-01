@@ -18,7 +18,7 @@ public class UserUseCase implements IUserServicePort {
         this.userPersistencePort = personPersistencePort;
     }
 
-    private User saveUser(User user) {
+    private User saveUser(User user, Long idRole) {
         if(userPersistencePort.existsByDniNumber(user.getDniNumber()))
             throw new PersonAlreadyExistsException();
         if(userPersistencePort.existsByEmail(user.getEmail()))
@@ -26,22 +26,25 @@ public class UserUseCase implements IUserServicePort {
         if(!hasLegalAge(user))
             throw new UserHasNotLegalAgeException();
 
+        user.setRole(new Role());
+        user.getRole().setId(idRole);
         return userPersistencePort.saveUser(user);
     }
 
 
     @Override
     public User saveOwner(User user) {
-        user.setRole(new Role());
-        user.getRole().setId(Constants.OWNER_ROLE_ID);
-        return saveUser(user);
+        return saveUser(user, Constants.OWNER_ROLE_ID);
     }
 
     @Override
     public User saveEmployee(User user) {
-        user.setRole(new Role());
-        user.getRole().setId(Constants.EMPLOYEE_ROLE_ID);
-        return saveUser(user);
+        return saveUser(user, Constants.EMPLOYEE_ROLE_ID);
+    }
+
+    @Override
+    public User saveClient(User user) {
+        return saveUser(user, Constants.USER_ROLE_ID);
     }
 
     @Override

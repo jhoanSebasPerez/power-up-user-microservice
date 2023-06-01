@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 @Headers("Authorization: {token}")
 public interface IRestaurantClient {
 
-    @RequestLine("GET /food-court/restaurant/{restaurantId}")
+    @RequestLine("GET /food-court-service/restaurant/{restaurantId}")
     RestaurantResponseDto getRestaurant(
             @Param("token")String token,
             @Param("restaurantId")Long restaurantId);
